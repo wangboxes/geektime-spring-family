@@ -16,11 +16,13 @@ import java.io.Serializable;
 @Table(name = "T_MENU")
 @Builder
 @Data
-@ToString(callSuper = true)
+@ToString(callSuper = true)//父类的字段也打印
 @NoArgsConstructor
 @AllArgsConstructor
 public class Coffee extends BaseEntity implements Serializable {
+
     private String name;
+
     @Type(type = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmount",
             parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "CNY")})
     private Money price;

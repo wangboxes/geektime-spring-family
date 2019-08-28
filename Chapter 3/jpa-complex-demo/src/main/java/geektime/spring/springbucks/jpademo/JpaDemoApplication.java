@@ -76,23 +76,27 @@ public class JpaDemoApplication implements ApplicationRunner {
 
 	private void findOrders() {
 		coffeeRepository
-				.findAll(Sort.by(Sort.Direction.DESC, "id"))
-				.forEach(c -> log.info("Loading {}", c));
+				.findAll(Sort.by(Sort.Direction.DESC, "id"))//按照id降序排序
+				.forEach(c -> log.info("-------Loading {}", c));
+
+		orderRepository
+				.findAll(Sort.by(Sort.Direction.DESC, "id"))//按照id降序排序
+				.forEach(c -> log.info("-------Loading {}", c));
 
 		List<CoffeeOrder> list = orderRepository.findTop3ByOrderByUpdateTimeDescIdAsc();
-		log.info("findTop3ByOrderByUpdateTimeDescIdAsc: {}", getJoinedOrderId(list));
+		log.info("---------findTop3ByOrderByUpdateTimeDescIdAsc: {}", getJoinedOrderId(list));
 
 		list = orderRepository.findByCustomerOrderById("Li Lei");
-		log.info("findByCustomerOrderById: {}", getJoinedOrderId(list));
+		log.info("---------findByCustomerOrderById: {}", getJoinedOrderId(list));
 
 		// 不开启事务会因为没Session而报LazyInitializationException
 		list.forEach(o -> {
-			log.info("Order {}", o.getId());
+			log.info("---------Order {}", o.getId());
 			o.getItems().forEach(i -> log.info("  Item {}", i));
 		});
 
 		list = orderRepository.findByItems_Name("latte");
-		log.info("findByItems_Name: {}", getJoinedOrderId(list));
+		log.info("---------findByItems_Name: {}", getJoinedOrderId(list));
 	}
 
 	private String getJoinedOrderId(List<CoffeeOrder> list) {

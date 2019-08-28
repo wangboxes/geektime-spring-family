@@ -20,7 +20,7 @@ import java.util.Collections;
 @SpringBootApplication
 @EnableJpaRepositories
 @Slf4j
-public class JpaDemoApplication implements ApplicationRunner {
+public class JpaDemoApplication implements ApplicationRunner {//项目启动后会自动运行run()方法
 	@Autowired
 	private CoffeeRepository coffeeRepository;
 	@Autowired

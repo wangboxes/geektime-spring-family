@@ -24,12 +24,15 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class CoffeeOrder extends BaseEntity implements Serializable {
+
     private String customer;
+
     @ManyToMany
     @JoinTable(name = "T_ORDER_COFFEE")
-    @OrderBy("id")
+    @OrderBy("id")//排序
     private List<Coffee> items;
-    @Enumerated
+
+    @Enumerated//枚举类型
     @Column(nullable = false)
     private OrderState state;
 }
